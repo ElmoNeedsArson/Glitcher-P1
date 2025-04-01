@@ -131,6 +131,22 @@
             border-radius: 5px;
             display: none;
         }
+
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.5);
+            display: none;
+            animation: blink 0.3s ease-out;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
     </style>
 </head>
 
@@ -152,6 +168,7 @@
     <canvas id="canvas"></canvas>
     <!-- <canvas id="glitchCanvas"></canvas> -->
     <audio id="hurrayAudio" src="ding.mp3" preload="auto"></audio>
+    <div id="overlay"></div>
 
     <script>
         let model;
@@ -168,6 +185,7 @@
         const port = document.getElementById('portal')
         const port1 = document.getElementById('portal1')
 
+        const overlay = document.getElementById('overlay');
 
         // Variables for person detection alerting.
         let lastPersonTime = Date.now();
@@ -242,7 +260,7 @@
         // 2 seconds cooldown
         const lastPlayedMap = new Map(); // Stores last played timestamp for each object
         function getRandomCooldown() {
-            return Math.floor(Math.random() * (2000 - 800 + 1)) + 800; // Random between 800-2000 ms
+            return Math.floor(Math.random() * (3000 - 800 + 1)) + 1500; // Random between 800-2000 ms
         }
 
         function playAudioForObject(objectClass) {
@@ -253,6 +271,9 @@
                 const audio = new Audio("ding.mp3");
                 audio.play();
                 lastPlayedMap.set(objectClass, now); // Update last played time
+                console.log("Nice")
+                overlay.style.display = "block";  // Show the overlay
+                setTimeout(() => overlay.style.display = "none", 300);
             }
         }
 
