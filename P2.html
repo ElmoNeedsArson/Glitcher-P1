@@ -2,6 +2,10 @@
 <html>
 
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
     <meta charset="UTF-8">
     <!-- Ensures proper scaling on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +19,10 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background: #000;
+            background: #000000;
+            font-family: "Quantico", sans-serif;
+            font-weight: 700;
+            font-style: normal;
             /* height: 100%;
         width: 100%; */
         }
@@ -37,17 +44,79 @@
             pointer-events: none;
         }
 
+        #video {
+            width: 100vh;
+        }
+
         #startButton {
+            /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+            font-family: "Quantico", sans-serif;
+            font-weight: 700;
+            font-style: normal;
             position: absolute;
-            top: 10px;
-            left: 10px;
+            border: none;
+            bottom: 5px;
+            right: 5px;
             z-index: 10;
             padding: 10px 20px;
             font-size: 16px;
+            margin-top: 10px;
+            background-color: rgb(255, 255, 255);
         }
 
-        #video {
-            width: 100vh;
+        #container1 {
+            display: flex;
+            width: 100vw;
+            align-items: center;
+            align-content: center;
+        }
+
+        #heading {
+            font-family: 'League Spartan', sans-serif;
+            font-weight: bold;
+            text-align: center;
+            padding-top: 20px;
+            width: 100vw;
+            /* position: absolute;
+      width: 100vw;
+      top: 10px;
+      z-index: 10; */
+            font-size: 32px;
+        }
+
+        #icon {
+            width: 50px;
+            height: 50px;
+            background-image: url(dots.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 50vh;
+            right: 10px;
+        }
+
+        #portal {
+            display: flex;
+            margin-top: 20px;
+            width: 80vw;
+            height: 60vh;
+            background-color: #bd0000;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #portal1 {
+            font-family: "Quantico", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+            margin: 10px;
+            padding: 10px;
+            width: 100%;
+            border: 6px white;
+            border-style: double;
+            color: white;
+            font-size: 20px;
+            position: relative;
         }
 
         #title {
@@ -60,19 +129,29 @@
             background: rgba(0, 0, 0, 0.7);
             padding: 10px;
             border-radius: 5px;
+            display: none;
         }
     </style>
 </head>
 
 <body>
-    <div id="title">Press Start to Begin</div>
-    <button id="startButton">Start Detection</button>
+    <!-- <div id="heading">AIBPO Solutions</div> -->
+    <div id="title">WAIT A BIT...</div>
+    <div id="container1"></div>
+    <div id="icon"></div>
+    <div id="portal">
+        <div id="portal1">
+            INSTRUCTIONS:<br>
+            1) COLLECT.
+            <button id="startButton">START!</button>
+        </div>
+    </div>
     <!-- Hidden video element -->
     <video id="video" autoplay muted playsinline style="display: none;"></video>
     <!-- Canvas for drawing (covering the entire viewport) -->
     <canvas id="canvas"></canvas>
     <!-- <canvas id="glitchCanvas"></canvas> -->
-    <audio id="hurrayAudio" src="ding-101492.mp3" preload="auto"></audio>
+    <audio id="hurrayAudio" src="ding.mp3" preload="auto"></audio>
 
     <script>
         let model;
@@ -85,6 +164,9 @@
         const title = document.getElementById('title');
 
         const hurrayAudio = document.getElementById('hurrayAudio'); // Get the audio element
+
+        const port = document.getElementById('portal')
+        const port1 = document.getElementById('portal1')
 
 
         // Variables for person detection alerting.
@@ -99,7 +181,7 @@
         function updateTitle() {
             currentIndex = Math.min(currentIndex + 1, itemsToFind.length);
             currentItems = itemsToFind.slice(0, currentIndex);
-            title.innerText = `Please find ${currentItems.join(', ')}!`;
+            title.innerText = `FIND ${currentItems.join(', ')}!`;
         }
 
         function startItemSequence() {
@@ -110,7 +192,7 @@
                 } else {
                     clearInterval(interval);
                 }
-            }, 10000);
+            }, 30000);
         }
 
         // Set up the webcam feed with improved resolution constraints.
@@ -168,7 +250,7 @@
             const cooldown = getRandomCooldown(); // Generate a new cooldown on each detection
 
             if (!lastPlayedMap.has(objectClass) || now - lastPlayedMap.get(objectClass) > cooldown) {
-                const audio = new Audio("ding-101492.mp3");
+                const audio = new Audio("ding.mp3");
                 audio.play();
                 lastPlayedMap.set(objectClass, now); // Update last played time
             }
@@ -394,6 +476,9 @@
         // Start detection on user click.
         startButton.addEventListener('click', () => {
             startButton.style.display = 'none';
+            port.style.display = 'none';
+            port1.style.display = 'none';
+            title.style.display = 'flex';
             main();
         });
     </script>
