@@ -242,13 +242,13 @@
         const boxY = adjY * scaleY;
         const boxWidth = width * scaleX;
         const boxHeight = height * scaleY;
-        ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+        //ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
         ctx.fillStyle = 'red';
-        ctx.fillText(
-          `${prediction.class} ${(prediction.score * 100).toFixed(1)}%`,
-          boxX,
-          boxY > 10 ? boxY - 5 : 10
-        );
+        // ctx.fillText(
+        //   `${prediction.class} ${(prediction.score * 100).toFixed(1)}%`,
+        //   boxX,
+        //   boxY > 10 ? boxY - 5 : 10
+        // );
       });
     }
 

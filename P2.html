@@ -107,8 +107,8 @@
 
         #portal1 {
             font-family: "Quantico", sans-serif;
-  font-weight: 700;
-  font-style: normal;
+            font-weight: 700;
+            font-style: normal;
             margin: 10px;
             padding: 10px;
             width: 100%;
@@ -144,8 +144,31 @@
         }
 
         @keyframes blink {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        #errorOverlay {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #00008B;
+            /* Windows blue screen color */
+            color: white;
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 24px;
+            padding-top: 20vh;
+            z-index: 99999;
         }
     </style>
 </head>
@@ -169,6 +192,19 @@
     <!-- <canvas id="glitchCanvas"></canvas> -->
     <audio id="hurrayAudio" src="ding.mp3" preload="auto"></audio>
     <div id="overlay"></div>
+    <div id="moreText"
+        style="display: none; font-size: 50px; font-weight: bold; color: red; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
+        MORE
+    </div>
+
+    <div id="errorOverlay">
+        <h1>💀 SYSTEM ERROR 💀</h1>
+        <p>A fatal error has occurred. System shutdown initiated.</p>
+        <p>Technical details: <span style="color: yellow;">ERROR CODE: 0xDEADCAFE</span></p>
+        <p>Contact system administrator.</p>
+        <p>Press CTRL+ALT+DEL to restart (not really).</p>
+    </div>
+
 
     <script>
         let model;
@@ -264,15 +300,28 @@
         }
 
         function playAudioForObject(objectClass) {
+            if (audioDisabled) {
+                console.warn("Audio playback is disabled.");
+                return;
+            }
             const now = Date.now();
             const cooldown = getRandomCooldown(); // Generate a new cooldown on each detection
 
             if (!lastPlayedMap.has(objectClass) || now - lastPlayedMap.get(objectClass) > cooldown) {
-                const audio = new Audio("ding.mp3");
+                if (audioPool.length === 0) {
+                    console.warn("No audios available to play.");
+                    return;
+                }
+                // getRandomInt returns a number from 0 (inclusive) to audioPool.length (exclusive)
+                let randomIndex = getRandomInt(0, audioPool.length);
+                console.log("Random index:", randomIndex);
+                const audio = new Audio(audioPool[randomIndex]);
                 audio.play();
                 lastPlayedMap.set(objectClass, now); // Update last played time
-                console.log("Nice")
-                overlay.style.display = "block";  // Show the overlay
+                console.log("Audio played for", objectClass);
+
+                // Show the overlay momentarily
+                overlay.style.display = "block";
                 setTimeout(() => overlay.style.display = "none", 300);
             }
         }
@@ -502,6 +551,83 @@
             title.style.display = 'flex';
             main();
         });
+
+        // Global audio lists
+        let baseAudios = [
+            "ding.mp3",
+            "discord extra slow.mp3",
+            "Discord ping slow.mp3",
+            "Discord Ping Sound Effect.mp3",
+            "sharp ping.mp3"
+        ];
+        let extraAudios = [
+            "Distored Discord.mp3",
+            "long distored discord.mp3"
+        ];
+
+        // The pool used by the function – initially only base audios.
+        let audioPool = [...baseAudios];
+
+        let audioDisabled = false;
+
+        // Utility function to generate a random integer in [min, max)
+        function getRandomInt(min, max) {
+            const minCeiled = Math.ceil(min);
+            const maxFloored = Math.floor(max);
+            return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+        }
+
+        // Function to remove a specific audio file from the audioPool
+        function removeAudioFile(fileName) {
+            const index = audioPool.indexOf(fileName);
+            if (index > -1) {
+                audioPool.splice(index, 1);
+                console.log(`Removed ${fileName} from the pool.`);
+            }
+        }
+
+        // Schedule adding the extra audios at 1 minute (60000 ms)
+        setTimeout(() => {
+            audioPool.push(...extraAudios);
+            console.log("Extra audios added:", extraAudios);
+        }, 60000);
+
+        // Schedule gradual removal of base audios over time.
+        // Adjust the times (in milliseconds) and filenames as needed.
+        setTimeout(() => removeAudioFile("discord extra slow.mp3"), 30000);                   // at 30 seconds
+        setTimeout(() => removeAudioFile("Discord ping slow.mp3"), 50000);       // at 80 seconds
+        setTimeout(() => removeAudioFile("Discord Ping Sound Effect.mp3"), 80000);         // at 100 seconds
+        setTimeout(() => removeAudioFile("sharp ping.mp3"), 110000); // at 140 seconds
+        setTimeout(() => removeAudioFile("ding.mp3"), 120000);                // at 120 seconds
+
+        // After 3 minutes (180000 ms), only extra audios should remain (if all removals worked as planned)
+        setTimeout(() => {
+            console.log("Final audio pool:", audioPool);
+        }, 121000);
+
+        setTimeout(() => {
+            audioDisabled = true;
+            console.log("Audio playback disabled.");
+            document.getElementById("errorOverlay").style.display = "block";
+        }, 150000);
+
+        setTimeout(() => {
+            function flashMoreText() {
+                const moreText = document.getElementById("moreText");
+                moreText.style.display = "block"; // Show text
+                setTimeout(() => {
+                    moreText.style.display = "none"; // Hide after 0.4s
+                }, 400);
+            }
+
+            function startFlashing() {
+                flashMoreText();
+                const nextInterval = getRandomInt(8000, 10000); // Random 8-10s
+                setTimeout(startFlashing, nextInterval); // Schedule next flash
+            }
+
+            startFlashing(); // Begin flashing "MORE"
+        }, 80000); // Start after 2 minutes
     </script>
 </body>
 
