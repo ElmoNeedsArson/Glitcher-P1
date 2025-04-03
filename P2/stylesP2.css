@@ -1,0 +1,156 @@
+body,
+        html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000000;
+            font-family: "Quantico", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            /* height: 100%;
+        width: 100%; */
+        }
+
+        /* Canvas is set to fill the viewport */
+        #canvas {
+            display: block;
+            /* width: 100vw;
+        height: 100vh; */
+        }
+
+        #glitchCanvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+        }
+
+        #video {
+            width: 100vh;
+        }
+
+        #startButton {
+            /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+            font-family: "Quantico", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            position: absolute;
+            border: none;
+            bottom: 5px;
+            right: 5px;
+            z-index: 10;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            background-color: rgb(255, 255, 255);
+        }
+
+        #container1 {
+            display: flex;
+            width: 100vw;
+            align-items: center;
+            align-content: center;
+        }
+
+        #heading {
+            font-family: 'League Spartan', sans-serif;
+            font-weight: bold;
+            text-align: center;
+            padding-top: 20px;
+            width: 100vw;
+            /* position: absolute;
+      width: 100vw;
+      top: 10px;
+      z-index: 10; */
+            font-size: 32px;
+        }
+
+        #icon {
+            width: 50px;
+            height: 50px;
+            background-image: url(dots.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 50vh;
+            right: 10px;
+        }
+
+        #portal {
+            display: flex;
+            margin-top: 20px;
+            width: 80vw;
+            height: 60vh;
+            background-color: #bd0000;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #portal1 {
+            font-family: "Quantico", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            margin: 10px;
+            padding: 10px;
+            width: 100%;
+            border: 6px white;
+            border-style: double;
+            color: white;
+            font-size: 20px;
+            position: relative;
+        }
+
+        #title {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 24px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.5);
+            display: none;
+            animation: blink 0.3s ease-out;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        #errorOverlay {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #00008B;
+            /* Windows blue screen color */
+            color: white;
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 24px;
+            padding-top: 20vh;
+            z-index: 99999;
+        }

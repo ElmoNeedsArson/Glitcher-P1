@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="stylesP2.css">
+    <!-- Ensures proper scaling on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Object Detection Full-Screen (Cover Mode)</title>
+    <!-- Load TensorFlow.js and the COCO-SSD model -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+</head>
+<body>
+    <div id="title">WAIT A BIT...</div>
+    <div id="container1"></div>
+    <div id="icon"></div>
+    <div id="portal">
+        <div id="portal1">
+            INSTRUCTIONS:<br>
+            1) COLLECT.
+            <button id="startButton">START!</button>
+        </div>
+    </div>
+    <!-- Hidden video element -->
+    <video id="video" autoplay muted playsinline style="display: none;"></video>
+    <!-- Canvas for drawing (covering the entire viewport) -->
+    <canvas id="canvas"></canvas>
+    <!-- <canvas id="glitchCanvas"></canvas> -->
+    <audio id="hurrayAudio" src="ding.mp3" preload="auto"></audio>
+    <div id="overlay"></div>
+    <div id="moreText"
+        style="display: none; font-size: 50px; font-weight: bold; color: red; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
+        MORE
+    </div>
+
+    <div id="errorOverlay">
+        <h1>SYSTEM ERROR</h1>
+        <p>A fatal error has occurred. System shutdown initiated.</p>
+        <p>Technical details: <span style="color: yellow;">ERROR CODE: 0xDEADCAFE</span></p>
+        <p>Contact system administrator.</p>
+        <p>Press CTRL+ALT+DEL to restart.</p>
+    </div>
+
+    <script src="scriptP2.js"></script>
+
+
+    <script>
+
+    </script>
+</body>
+
+</html>
