@@ -1,100 +1,100 @@
 body,
-    html {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: #efefef;
-      /* height: 100%;
+html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #efefef;
+    /* height: 100%;
         width: 100%; */
-    }
+}
 
-    /* Canvas is set to fill the viewport */
-    #canvas {
-      display: block;
-      /* width: 100vw;
+/* Canvas is set to fill the viewport */
+#canvas {
+    display: block;
+    /* width: 100vw;
         height: 100vh; */
-    }
+}
 
-    #glitchCanvas {
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-    }
+#glitchCanvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+}
 
-    #startButton {
-      /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
-      font-family: 'League Spartan', sans-serif;
-      margin-left: auto;
-      margin-right: auto;
-      z-index: 10;
-      padding: 10px 20px;
-      font-size: 16px;
-      margin-top: 10px;
-      background-color: rgba(243,181,151,1);
-    }
+#startButton {
+    /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+    font-family: 'League Spartan', sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 10;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+    background-color: rgba(243, 181, 151, 1);
+}
 
-    #container1{
-      display: flex;
-      width: 100vw;
-      align-items: center;
-      align-content: center;
-    }
+#container1 {
+    display: flex;
+    width: 100vw;
+    align-items: center;
+    align-content: center;
+}
 
-    /* .container1{
+/* .container1{
       height: 100vh;
       background-color: #efefef;
       border-bottom: 2px black solid;
     } */
 
-    #container2{
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      width: 5vw;
-      height: 100vh;
-      background: rgb(238,75,24);
-      background: linear-gradient(0deg, rgba(238,75,24,1) 0%, rgba(243,181,151,1) 100%);
-    }
+#container2 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 5vw;
+    height: 100vh;
+    background: rgb(238, 75, 24);
+    background: linear-gradient(0deg, rgba(238, 75, 24, 1) 0%, rgba(243, 181, 151, 1) 100%);
+}
 
-    #heading{
-      font-family: 'League Spartan', sans-serif;
-      font-weight: bold;
-      text-align: center;
-      padding-top: 20px;
-      width: 100vw;
-      /* position: absolute;
+#heading {
+    font-family: 'League Spartan', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 20px;
+    width: 100vw;
+    /* position: absolute;
       width: 100vw;
       top: 10px;
       z-index: 10; */
-      font-size: 32px;
-    }
+    font-size: 32px;
+}
 
-    #decorative-element{
-      width: 40vw;
-      height: 40vw;
-      border-radius: 50%;
-      border: black solid 1px;
-      background: transparent;
-      position: absolute;
-      bottom: -20vw;
-      right: -15vw;
-    }
+#decorative-element {
+    width: 40vw;
+    height: 40vw;
+    border-radius: 50%;
+    border: black solid 1px;
+    background: transparent;
+    position: absolute;
+    bottom: -20vw;
+    right: -15vw;
+}
 
-    #video {
-      width: 100vh;
-    }
+#video {
+    width: 100vh;
+}
 
-    #icon{
-      width: 50px;
-      height: 50px;
-      background-image: url(dots.png);
-      background-size: contain;
-      background-repeat: no-repeat;
-      position: absolute;
-      top: 50vh;
-      right: 10px;
-    }
+#icon {
+    width: 50px;
+    height: 50px;
+    background-image: url(dots.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 50vh;
+    right: 10px;
+}
